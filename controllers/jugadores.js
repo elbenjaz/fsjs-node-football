@@ -3,6 +3,13 @@ const { getPlayer, getPlayers, addPlayer, getTeam } = require('../db/consultas')
 const obtenerJugadores = async (req, res) => {
     try {
         const { teamID } = req.params;
+
+        const teamExists = await getTeam({ id: teamID });
+
+        if (!teamExists) {
+            return res.status(400).json({ error: "Equipo no está registrado." });
+        }
+
         const jugadores = await getPlayers({ id_equipo: teamID });
 
         return res.status(200).json(
