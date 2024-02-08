@@ -1,5 +1,6 @@
 const express = require('express');
 const { auth } = require("./middlewares/auth.js");
+const loginValidate = require("./middlewares/validation/login.js");
 
 const app = express();
 
@@ -10,7 +11,7 @@ const { login } = require('./controllers/login')
 const { obtenerJugadores, registrarJugador } = require('./controllers/jugadores')
 const { obtenerEquipos, agregarEquipo } = require('./controllers/equipos')
 
-app.post("/login", login)
+app.post("/login", loginValidate, login)
 
 app.get("/equipos", obtenerEquipos)
 app.post("/equipos", auth.checkAuthentication, agregarEquipo)

@@ -18,7 +18,7 @@ const login = async (req, res) => {
             return res.status(200).send({ token });
         }
     
-        return res.status(400).send("Usuario y/o contraseña incorrecta.");    
+        return res.status(400).send({ error: "Usuario y/o contraseña incorrecta." });
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }
